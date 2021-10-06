@@ -39,8 +39,7 @@ public class DriverManager {
 
     public WebDriverWait getWebDriverWait() {
         if (wait == null) {
-            wait = new WebDriverWait(DRIVER_MANAGER.getDriver(),
-                    Long.parseLong(PROPERTIES_MANAGER.getProperty(IMPLICITLY_WAIT)), 1000);
+            wait = new WebDriverWait(DRIVER_MANAGER.getDriver(), 40, 1000);
         }
         return wait;
     }
