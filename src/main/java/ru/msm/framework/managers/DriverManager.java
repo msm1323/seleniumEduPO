@@ -4,6 +4,7 @@ import org.apache.commons.exec.OS;
 import org.openqa.selenium.WebDriver;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -81,7 +82,9 @@ public class DriverManager {
                 break;
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", PROPERTIES_MANAGER.getProperty(chrome));
-                driver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--disable-notifications");
+                driver = new ChromeDriver(chromeOptions);
                 break;
             default:
                 Assertions.fail("Типа браузера '" + PROPERTIES_MANAGER.getProperty(TYPE_BROWSER) + "' не существует во фреймворке");
