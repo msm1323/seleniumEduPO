@@ -28,8 +28,7 @@ public class FirstTest extends BaseTestClass {
                 .increaseExistingProductNumByName(washer, 2)
                 .checkTotalOrderPrice()
                 .returnBackRemovedProduct()
-                .checkProductReturnBackByName(game)
-        ;
+                .checkProductReturnBackByName(game);
     }
 
 }

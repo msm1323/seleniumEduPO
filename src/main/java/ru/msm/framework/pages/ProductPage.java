@@ -20,7 +20,6 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//div[contains(@class,'price')]//div[contains(@class,'price')]")
     private WebElement price;
 
-    //как сделать not contains(@class,'passive') ???
     //button[@class='button-ui buy-btn button-ui_brand']
     @FindBy(xpath = "//div[@class='product-buy product-buy_one-line']//button[contains(@class,'button-ui buy-btn')]")
     private WebElement buttonBuy;
@@ -39,7 +38,7 @@ public class ProductPage extends BasePage {
 //    @FindBy(xpath = "//div[contains(@class,'additional-sales-tabs__title') and contains(text(), 'арантия')]")
 //    private WebElement w;
 
-    //костыль
+    //?..
     @FindBy(xpath = "//span[@class='cart-link__badge']")
     private WebElement orderNumProductsLabel;
 
