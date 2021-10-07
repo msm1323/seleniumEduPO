@@ -5,10 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.msm</groupId>
-    <artifactId>seleniumEduPO</artifactId>
+    <artifactId>page-object-allure</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+
+        <allure-results-directory>${project.build.directory}/reports/allure-results</allure-results-directory>
 
         <!-- Encoding -->
         <encoding.type>UTF-8</encoding.type>
@@ -25,10 +27,13 @@
         <selenium-java.version>3.141.59</selenium-java.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
         <junit-platform-launcher.version>1.7.0</junit-platform-launcher.version>
+        <allure-junit5.version>2.13.6</allure-junit5.version>
 
         <!-- Plugin version -->
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
         <maven-compiler.version>3.8.1</maven-compiler.version>
+        <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
+        <aspectj.version>1.8.10</aspectj.version>
 
     </properties>
 
@@ -53,6 +58,12 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
             <version>${junit-platform-launcher.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure-junit5.version}</version>
         </dependency>
 
     </dependencies>
@@ -85,7 +96,49 @@
                     <argLine>
                         -Xmx1024m
                         -Dfile.encoding=${encoding.type}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        <!--allure.results.directory варант задания 1-->
+<!--                    -Dallure.results.directory=${project.build.directory}/reports/allure-results-->
                     </argLine>
+                    <!--allure.results.directory варант задания 2-->
+<!--                <systemPropertyVariables>-->
+<!--                    <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>-->
+<!--                </systemPropertyVariables>-->
+                    <systemProperties>
+                        <property>
+                            <name>junit.jupiter.extensions.autodetection.enabled</name>
+                            <value>true</value>
+                        </property>
+                        <!--allure.results.directory варант задания 3-->
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure-results-directory}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+                <dependencies>
+<!--                    <dependency>-->
+<!--                        <groupId>org.junit.platform</groupId>-->
+<!--                        <artifactId>junit-platform-surefire-provider</artifactId>-->
+<!--                        <version>${junit-platform-surefire-provider.version}</version>-->
+<!--                    </dependency>-->
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Сборка html-отчета-->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+                <configuration>
+                    <reportVersion>2.10.0</reportVersion>
+                    <resultsDirectory>${allure-results-directory}</resultsDirectory>
+                    <reportDirectory>${project.build.directory}/reports/allure-reports</reportDirectory>
                 </configuration>
             </plugin>
 
