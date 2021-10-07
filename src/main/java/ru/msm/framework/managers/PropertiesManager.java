@@ -25,13 +25,13 @@ public class PropertiesManager {
 
     /**
      * Метод подгружает содержимого файла application.properties в переменную {@link #properties}
-     * Либо из файла переданного пользователем через настройку -DpropFile={nameFile}
+     * Либо из файла, переданного пользователем через настройку -DpropFile={nameFile}
      */
     private void loadApplicationProperties() {
         try {
             properties.load(new FileInputStream(
-                    new File("src/main/resources/" +
-                            System.getProperty("propFile", "application") + ".properties")));
+                    "src/main/resources/" +
+                            System.getProperty("propFile", "application") + ".properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
