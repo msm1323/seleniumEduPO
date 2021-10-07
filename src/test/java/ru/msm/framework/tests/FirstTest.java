@@ -5,6 +5,7 @@ import ru.msm.framework.BaseTestClass;
 
 public class FirstTest extends BaseTestClass {
 
+//    @RepeatedTest(5)
     @Test
     public void dnsTest() {
 
@@ -25,7 +26,7 @@ public class FirstTest extends BaseTestClass {
                 .checkOrderPrices()
                 .removeProductByName(game)
                 .checkProductRemovingByName(game)
-                .increaseExistingProductNumByName(washer, 2)
+                .changeExistingProductNumByName(washer, true, 2)
                 .checkTotalOrderPrice()
                 .returnBackRemovedProduct()
                 .checkProductReturnBackByName(game);

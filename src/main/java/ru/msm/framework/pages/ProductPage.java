@@ -119,7 +119,7 @@ public class ProductPage extends BasePage {
         DRIVER_MANAGER.getWebDriverWait().until(ExpectedConditions.attributeContains(
                 By.xpath("//div[contains(@class,'product-buy__sub')]"), "innerText", "цена изменена"));
 
-        String xPp = "//span[contains(text(),'24 мес')]/../..//span[contains(@class,'price')]";
+        String xPp = String.format("//span[contains(text(),'%d мес')]/../..//span[contains(@class,'price')]", m);
         Integer p = formatD(DRIVER.findElement(By.xpath(xPp)));
 
         product.changeWarranty(type, m, p);
@@ -130,13 +130,13 @@ public class ProductPage extends BasePage {
     public ProductPage buy() {
         waitUntilElementToBeClickable(buttonBuy).click();
         OrderPage.addProductToOrder(product);   //?..
-        newNum++;
+        numProductsInOrder++;
         return this;
     }
 
     public ProductPage checkCurrentTotalPrice() {
         DRIVER_MANAGER.getWebDriverWait().until(ExpectedConditions.attributeContains(orderNumProductsLabel,
-                "outerText", String.valueOf(newNum)));
+                "outerText", String.valueOf(numProductsInOrder)));
 
         Assertions.assertEquals(
                 OrderPage.getCurrentTotalPrice(),

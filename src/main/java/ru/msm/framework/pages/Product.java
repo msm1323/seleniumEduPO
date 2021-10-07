@@ -16,6 +16,17 @@ public class Product {
 
     private final String name;
 
+    private int num = 1;
+
+    public int getNum() {
+        return num;
+    }
+
+    //возвращать старое значение?
+    public void changeNum(int newNum){
+        num = newNum;
+    }
+
     public int getPrice() {
         return price;
     }

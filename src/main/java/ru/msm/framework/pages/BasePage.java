@@ -26,7 +26,7 @@ abstract public class BasePage {
     @FindBy(xpath = "//span[@class='cart-link__badge']")
     protected WebElement orderNumProductsLabel;
 
-    public static int newNum = 0;
+    public static int numProductsInOrder = 0;   //берется из лейбла с верхней панели (преимущественно)
 
     public ResultPage search(String input) {
         waitUntilElementToBeClickable(searchLine);
